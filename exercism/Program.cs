@@ -2,4 +2,16 @@
 
 using Exercism;
 
-Console.WriteLine(Leap.IsLeapYear(2100));
+var counts = new int[]
+{
+    4,
+    5,
+    9,
+    10,
+    9,
+    4,
+    3
+};
+
+var birdCount = new BirdCount(counts);
+birdCount.HasDayWithoutBirds();

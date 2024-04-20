@@ -1,17 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for mor
 
-using Exercism;
+using Exercism.Date;
+using Exercism.Inheritance;
 
-var counts = new int[]
-{
-    4,
-    5,
-    9,
-    10,
-    9,
-    4,
-    3
-};
+var wizard = new Wizard();
+Console.WriteLine(wizard.ToString());
 
-var birdCount = new BirdCount(counts);
-birdCount.HasDayWithoutBirds();
+var warrior = new Warrior();
+Console.WriteLine(warrior.ToString());
+
+// wizard.PrepareSpell();
+Console.WriteLine(wizard.DamagePoints(warrior));
+// => "Character is a Warrior"

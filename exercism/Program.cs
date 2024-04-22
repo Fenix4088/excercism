@@ -1,14 +1,8 @@
-﻿// See https://aka.ms/new-console-template for mor
+﻿
 
-using Exercism.Date;
-using Exercism.Inheritance;
+using Exercism.Dictionaries;
 
-var wizard = new Wizard();
-Console.WriteLine(wizard.ToString());
+var res = DialingCodes.FindLongestCountryName(DialingCodes.GetEmptyDictionary());
 
-var warrior = new Warrior();
-Console.WriteLine(warrior.ToString());
 
-// wizard.PrepareSpell();
-Console.WriteLine(wizard.DamagePoints(warrior));
-// => "Character is a Warrior"
+Console.WriteLine(Languages.IsUnique(Languages.GetExistingLanguages()));

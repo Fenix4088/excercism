@@ -1,8 +1,5 @@
 ﻿
 
-using Exercism.Dictionaries;
+using Exercism.Casting;
 
-var res = DialingCodes.FindLongestCountryName(DialingCodes.GetEmptyDictionary());
-
-
-Console.WriteLine(Languages.IsUnique(Languages.GetExistingLanguages()));
+Console.WriteLine(new SecurityPassMaker().GetDisplayName(new SecurityJunior()));

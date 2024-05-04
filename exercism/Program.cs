@@ -1,17 +1,11 @@
 ﻿
+using Exercism.OperatorOverloading;
 
+CurrencyAmount amountA = new CurrencyAmount(55, "HD");
+// amountA > new CurrencyAmount(50, "HD")
+// => true
+// amountA < new CurrencyAmount(50, "HD")
+// => false
+// amountA > new CurrencyAmount(50, "USD")
 
-
-using Exercism.OptionalParameters;
-
-var character = new Character();
-character.Class = "Wizard";
-character.Level = 4;
-character.HitPoints = 28;
-
-var destination = new Destination();
-destination.Name = "Muros";
-destination.Inhabitants = 732;
-
-
-Console.WriteLine(GameMaster.Describe(character, destination));
+Console.WriteLine(amountA < new CurrencyAmount(50, "USD"));

@@ -1,11 +1,5 @@
-﻿
-using Exercism.OperatorOverloading;
+﻿using Exercism.StringsFormatting;
+using Exercism.Time;
 
-CurrencyAmount amountA = new CurrencyAmount(55, "HD");
-// amountA > new CurrencyAmount(50, "HD")
-// => true
-// amountA < new CurrencyAmount(50, "HD")
-// => false
-// amountA > new CurrencyAmount(50, "USD")
 
-Console.WriteLine(amountA < new CurrencyAmount(50, "USD"));
+Console.WriteLine(HighSchoolSweethearts.DisplayGermanExchangeStudents("Norbert", "Heidi", new DateTime(2019, 1, 22), 1535.22f));

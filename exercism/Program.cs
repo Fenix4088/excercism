@@ -1,9 +1,5 @@
-﻿using Exercism.RegularExpressions;
-
-var lp = new LogParser();
-// Console.WriteLine(lp.ListLinesWithPasswords(new string[] {"my passwordsecret is great"}));
-// => "passwordsecret: my passwordsecret is great"
+﻿
+using Exercism.Strings;
 
 
-Console.WriteLine(lp.ListLinesWithPasswords(lp.ListLinesWithPasswords(new string[] {"my password secret"})));
-// => {"--------: my password secret"}
+Console.WriteLine(Isogram.IsIsogram("Alphabet"));

@@ -1,5 +1,13 @@
-﻿
-using Exercism;
-using Exercism.Arrays;
+﻿using Exercism.Dictionaries;
+using Exercism.ExtensionMethods;
+using Exercism.Lists;
 
-Console.WriteLine(new SpaceAge(2134835688).OnMercury());
+foreach (var item in NucleotideCount.Count("GGGGGGG"))
+{
+    Console.WriteLine(item.Key + " " + item.Value);
+}
+
+foreach (var item in NucleotideCount.Count("GGGGGGG"))
+{
+    Console.WriteLine(item.Key + " " + item.Value);
+}

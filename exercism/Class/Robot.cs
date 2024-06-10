@@ -1,18 +1,34 @@
-namespace Exercism;
+namespace Exercism.Class;
 
 public class Robot
 {
-    public string Name
+    private string _name;
+    private static HashSet<string> cache = new HashSet<string> {};
+
+    public string Name => _name;
+    
+    public Robot()
     {
-        get
+        var rand = new Random(); 
+        this._name = GenerateName();
+    }
+    
+    private string GenerateName()
+    {
+        var rand = new Random();
+        var name = "";
+        var wasAdded = false;
+        while (!wasAdded)
         {
-            var rand = new Random(); 
-            return $"{(char)rand.Next(65, 91)}{(char)rand.Next(65, 91)}{rand.Next(1000, 10000)}";
+            name = $"{(char)rand.Next(65, 91)}{(char)rand.Next(65, 91)}{rand.Next(100, 999)}";
+            wasAdded = cache.Add(name);
         }
+
+        return name;
     }
 
     public void Reset()
     {
-        Console.WriteLine(Name);
+        this._name = GenerateName();
     }
 }

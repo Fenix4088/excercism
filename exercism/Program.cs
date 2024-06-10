@@ -1,13 +1,5 @@
-﻿using Exercism.Dictionaries;
-using Exercism.ExtensionMethods;
-using Exercism.Lists;
+﻿
+using Exercism.GenericTypes;
+using Exercism.Numbers;
 
-foreach (var item in NucleotideCount.Count("GGGGGGG"))
-{
-    Console.WriteLine(item.Key + " " + item.Value);
-}
-
-foreach (var item in NucleotideCount.Count("GGGGGGG"))
-{
-    Console.WriteLine(item.Key + " " + item.Value);
-}
+Console.WriteLine(new Clock(34, 37).ToString());

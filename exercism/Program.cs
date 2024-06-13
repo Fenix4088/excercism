@@ -1,5 +1,5 @@
-﻿
-using Exercism.GenericTypes;
-using Exercism.Numbers;
+﻿using Exercism.Numbers;
 
-Console.WriteLine(new Clock(34, 37).ToString());
+var m = SpiralMatrix.GetMatrix(5);
+
+Console.WriteLine(m);

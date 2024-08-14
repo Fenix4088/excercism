@@ -1,5 +1,6 @@
-﻿using Exercism.Numbers;
+﻿using Exercism.Exceptions;
+using Exercism.Numbers;
+using Exercism.Strings;
 
-var m = SpiralMatrix.GetMatrix(5);
-
-Console.WriteLine(m);
+var res = ResistorColorTrio.Label(new[] { "yellow", "violet", "yellow" });
+Console.WriteLine(res);

@@ -3,4 +3,4 @@ using Exercism.Date;
 
 // new BethanyMain().Init();
 
-new Meetup(3, 2013).Day(DayOfWeek.Sunday, Schedule.Last);
+new Meetup(4, 2013).Day(DayOfWeek.Monday, Schedule.First);

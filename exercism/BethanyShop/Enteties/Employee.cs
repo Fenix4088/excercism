@@ -1,23 +1,40 @@
 using BethanysPieShopHRM.Logic;
+using Exercism.Arrays;
 using Newtonsoft.Json;
 
 namespace Exercism.BethanyShop.Enteties;
 
 public class Employee
 {
-    public string firstName;
-    public string lastName;
-    public string email;
-    public DateTime birthDate;
+    private string _firstName;
+    private string _lastName;
+    private string _email;
+    private DateTime _birthDate;
+    private int _numberOfHoursWorked;
+    private double _wage;
+    private double? _hourlyRate;
+    private EmployeeType _employeeType;
+    private static double _taxRate = 0.15;
     
-    public int numberOfHoursWorked;
-    public double wage;
-    public double? hourlyRate;
-    public EmployeeType employeeType;
+    const int MinHoursWorkingUnit = 1;
 
-    public static double taxtRate = 0.15;
-    
-    const int minHoursWorkingUnit = 1;
+    public string FirstName
+    {
+        get => _firstName;
+        set => _firstName = value.Capitilize();
+    }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public DateTime BirthDate { get; set; }
+    public int NumberOfHoursWorked { get; private set; }
+    public double Wage { get; private set; }
+    public double? HourlyRate
+    {
+        get => _hourlyRate;
+        set => _hourlyRate = _hourlyRate < 0 ? 0 : value;
+    }
+    public EmployeeType EmployeeType { get; set; }
+    public static double TaxRate { get; set; }
     
     public Employee(
         string firstName, 
@@ -27,23 +44,23 @@ public class Employee
         double? hourlyRate, 
         EmployeeType employeeType = EmployeeType.StoreManager)
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.birthDate = birthDate;
-        this.hourlyRate = hourlyRate ?? 10;
-        this.employeeType = employeeType;
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        BirthDate = birthDate;
+        HourlyRate = hourlyRate ?? 10;
+        EmployeeType = employeeType;
     }
 
     public void PerformWork()
     {
-        PerformWork(minHoursWorkingUnit);
+        PerformWork(MinHoursWorkingUnit);
     }
 
     public void PerformWork(int numberOfHours)
     {
-        numberOfHoursWorked += numberOfHours;
-        Console.WriteLine($"{firstName} {lastName} has worked for {numberOfHoursWorked}");
+        NumberOfHoursWorked += numberOfHours;
+        Console.WriteLine($"{FirstName} {LastName} has worked for {NumberOfHoursWorked}");
     }
 
     public string ConvertToJson() => JsonConvert.SerializeObject(this);
@@ -51,7 +68,7 @@ public class Employee
     public int CalculateBonus(int bonus, ref int bonusTax)
     {
 
-        if (numberOfHoursWorked > 10) bonus *= 2;
+        if (NumberOfHoursWorked > 10) bonus *= 2;
 
         if (bonus >= 200)
         {
@@ -68,7 +85,7 @@ public class Employee
     {
         WageCalculations wageCalculations = new WageCalculations();
 
-        return wageCalculations.ComplexWageCalculation(wage, taxtRate, 3, 42);
+        return wageCalculations.ComplexWageCalculation(Wage, TaxRate, 3, 42);
     }
 
     public double ReceiveWage(bool resetHours = true)
@@ -76,33 +93,33 @@ public class Employee
         double wageBeforeTax = 0.0;
 
         
-        if (employeeType == EmployeeType.Manager)
+        if (EmployeeType == EmployeeType.Manager)
         {
-            wageBeforeTax = numberOfHoursWorked * hourlyRate.Value * 1.25;
-            Console.WriteLine($"An extra was added to the wage sinse {firstName} is a manager!.");
+            wageBeforeTax = NumberOfHoursWorked * HourlyRate.Value * 1.25;
+            Console.WriteLine($"An extra was added to the wage sinse {FirstName} is a manager!.");
         }
         else
         {
-            wageBeforeTax = numberOfHoursWorked * hourlyRate.Value;
+            wageBeforeTax = NumberOfHoursWorked * HourlyRate.Value;
         }
 
-        double taxAmount = wageBeforeTax * taxtRate;
-        wage = wageBeforeTax - taxAmount;
+        double taxAmount = wageBeforeTax * TaxRate;
+        Wage = wageBeforeTax - taxAmount;
 
-        Console.WriteLine($"{firstName} {lastName} has received a wage of {wage} for {numberOfHoursWorked} hour(s) of work.");
+        Console.WriteLine($"{FirstName} {LastName} has received a wage of {Wage} for {NumberOfHoursWorked} hour(s) of work.");
 
-        if (resetHours) numberOfHoursWorked = 0;
+        if (resetHours) NumberOfHoursWorked = 0;
         
-        return wage;
+        return Wage;
     }
 
     public static void DisplayTaxRate()
     {
-        Console.WriteLine($"The current tax rate is {taxtRate}");
+        Console.WriteLine($"The current tax rate is {TaxRate}");
     }
 
     public void DisplayEmployeeDetails()
     {
-        Console.WriteLine($"\nFirst name: \t{firstName}\nLast name: \t{lastName}\nEmail: \t{email}\nBirthday: \t{birthDate.ToShortDateString()}\nTax rate: \t{taxtRate}");
+        Console.WriteLine($"\nFirst name: \t{FirstName}\nLast name: \t{LastName}\nEmail: \t{Email}\nBirthday: \t{BirthDate.ToShortDateString()}\nTax rate: \t{TaxRate}");
     }
 }

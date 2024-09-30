@@ -87,6 +87,7 @@ namespace BethanyShop.Utilities;
                 Console.WriteLine("2: Add new product");
                 Console.WriteLine("3: Clone product");
                 Console.WriteLine("4: View products with low stock");
+                Console.WriteLine("5: View all products in stock");
                 Console.WriteLine("0: Back to main menu");
 
                 Console.Write("Your selection: ");
@@ -109,6 +110,9 @@ namespace BethanyShop.Utilities;
 
                     case "4":
                         ShowProductsLowOnStock();
+                        break;
+                    case "5":
+                        ShowAllProductsInStock();
                         break;
 
                     default:
@@ -168,6 +172,24 @@ namespace BethanyShop.Utilities;
             {
                 Console.WriteLine("Non-existing product selected. Please try again.");
             }
+        }
+
+        private static void ShowAllProductsInStock()
+        {
+            if (inventory.Any(product => product.AmountInStock > 0))
+            {
+                inventory.Where(product => product.AmountInStock > 0).Select(product =>
+                {
+                    Console.WriteLine(product.DisplayDetailsShort() + "\n");
+                    return product;
+                }).ToList();
+                Console.ReadLine();
+                return;
+            }
+            
+            Console.WriteLine("Inventory is empty!");
+            Console.ReadLine();
+
         }
 
         private static void ShowProductsLowOnStock()

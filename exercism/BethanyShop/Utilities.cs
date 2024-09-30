@@ -15,9 +15,11 @@ namespace BethanyShop.Utilities;
         internal static void InitializeStock()//Mock implementation
         {
             
-            Product p1 = new("Sugar", new Price(10, Currency.Euro), UnitType.PerKg, 100, description: "Very white product!");
-            Product p2 = new("Cake decorations", new Price(10, Currency.Euro), UnitType.PerItem, 1000, description: "Blue!");
-            Product p3 = new("Strawberry", new Price(10, Currency.Euro), UnitType.PerBox, 100, description: "Red!");
+            Product p1 = new("Sugar", new Price(10, Currency.Euro), UnitType.PerKg, 100, description: "Very white product!", 0);
+            Product p2 = new("Cake decorations", new Price(10, Currency.Euro), UnitType.PerItem, 1000, description: "Blue!", 0);
+            Product p3 = new("Strawberry", new Price(10, Currency.Euro), UnitType.PerBox, 100, description: "Red!", 0);
+
+            var res = p1.IsBelowStockTreshold;
             
             inventory.Add(p1);
             inventory.Add(p2);

@@ -2,11 +2,17 @@ using System.Text;
 
 namespace Exercism.BethanyShop.Enteties.Products;
 
-public class Product(string name, Price price, UnitType unitType, int maxItemInStock = 0, string? description = null)
+
+public class Product
 {
 
     public static int StockTreshold = 5;
 
+    private string name;
+    private string description;
+    private int amountInStock;
+    private const int maxItemInStock = 100;
+    private static readonly Price price = new(0, Currency.Dollar);
     public string? Description
     {
         get => description;
@@ -18,12 +24,14 @@ public class Product(string name, Price price, UnitType unitType, int maxItemInS
     }
     public int MaxItemInStock { get; set; } = maxItemInStock;
     
-    private int amoutInStock;
-    public int AmountInStock { 
-        get => amoutInStock;
+    // private int amoutInStock;
+
+    public int AmountInStock
+    {
+        get => amountInStock;
         private set
         {
-            amoutInStock = value;
+            amountInStock = value;
             UpdateLowStock();
         }
     }
@@ -36,6 +44,24 @@ public class Product(string name, Price price, UnitType unitType, int maxItemInS
     
     public static void ChangeStockTreshold(int newTreshold) {
         if (newTreshold > 0) StockTreshold = newTreshold;
+    }
+
+
+    public Product(
+        string name,
+        Price price,
+        UnitType unitType,
+        int maxItemInStock = 0,
+        string? description = null,
+        int amountInStock = 0)
+    {
+        Name = name;
+        Price = price;
+        UnitType = unitType;
+        MaxItemInStock = maxItemInStock;
+        Description = description;
+        AmountInStock = amountInStock;
+        UpdateLowStock();
     }
 
     public void UseProduct(int items)
@@ -69,7 +95,7 @@ public class Product(string name, Price price, UnitType unitType, int maxItemInS
             Log($"{CreateSimpleProductRepresentation()} stock overflow. {newStock - AmountInStock} item(s) ordered that couldn't be store.");
         }
 
-        if (amoutInStock > StockTreshold) IsBelowStockTreshold = false;
+        if (amountInStock > StockTreshold) IsBelowStockTreshold = false;
 
     }
 

@@ -9,13 +9,8 @@ public class BethanyMain
 {
     public void Init()
     {
-
-
-        Product product = new("Butter", new Price(4.5, Currency.Euro), UnitType.PerItem, 1000);
-        product.IncreaseStock(2);
-        Console.WriteLine(product.Price.ToString());
-        Console.WriteLine(product.DisplayDetailsFull());
-
+        Utilities.InitializeStock();
+        Utilities.ShowMainMenu();
 
         // List<Employee> employees = new List<Employee>();
         //

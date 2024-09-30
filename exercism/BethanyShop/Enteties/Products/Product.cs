@@ -5,6 +5,8 @@ namespace Exercism.BethanyShop.Enteties.Products;
 public class Product(string name, Price price, UnitType unitType, int maxItemInStock = 0, string? description = null)
 {
 
+    public static int StockTreshold = 5;
+
     public string? Description
     {
         get => description;
@@ -32,6 +34,10 @@ public class Product(string name, Price price, UnitType unitType, int maxItemInS
 
     public bool IsBelowStockTreshold { get;  private set; }
     
+    public static void ChangeStockTreshold(int newTreshold) {
+        if (newTreshold > 0) StockTreshold = newTreshold;
+    }
+
     public void UseProduct(int items)
     {
         if (items <= AmountInStock)
@@ -63,7 +69,7 @@ public class Product(string name, Price price, UnitType unitType, int maxItemInS
             Log($"{CreateSimpleProductRepresentation()} stock overflow. {newStock - AmountInStock} item(s) ordered that couldn't be store.");
         }
 
-        if (amoutInStock > 10) IsBelowStockTreshold = false;
+        if (amoutInStock > StockTreshold) IsBelowStockTreshold = false;
 
     }
 
@@ -88,9 +94,9 @@ public class Product(string name, Price price, UnitType unitType, int maxItemInS
 
     }
 
-    private void UpdateLowStock()
+    public void UpdateLowStock()
     {
-        if (AmountInStock < 10) IsBelowStockTreshold = true;
+        if (AmountInStock < StockTreshold) IsBelowStockTreshold = true;
     }
     
     private void DecreaseStock(int items, string reason)

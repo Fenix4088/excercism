@@ -1,5 +1,6 @@
 using System.Text;
 using Exercism.BethanyShop.Enteties;
+using exercism.BethanyShop.Enteties.Products;
 using Exercism.BethanyShop.Enteties.Products;
 
 namespace BethanyShop.Utilities;
@@ -14,6 +15,11 @@ namespace BethanyShop.Utilities;
 
         internal static void InitializeStock()//Mock implementation
         {
+            
+            BoxedProduct boxedProduct1 = new ("Eggs", new Price(10, Currency.Euro), 100,  "Very white product!", 0, 10);
+            
+            boxedProduct1.IncreaseStock(100);
+            boxedProduct1.UseProduct(10);
             
             Product p1 = new("Sugar", new Price(10, Currency.Euro), UnitType.PerKg, 100, description: "Very white product!", 0);
             Product p2 = new("Cake decorations", new Price(10, Currency.Euro), UnitType.PerItem, 1000, description: "Blue!", 0);

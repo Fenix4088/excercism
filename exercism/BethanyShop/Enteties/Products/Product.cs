@@ -11,7 +11,7 @@ public class Product
     private string name;
     private string description;
     private int amountInStock;
-    private const int maxItemInStock = 100;
+    protected const int maxItemInStock = 100;
     private static readonly Price price = new(0, Currency.Dollar);
     public string? Description
     {
@@ -29,7 +29,7 @@ public class Product
     public int AmountInStock
     {
         get => amountInStock;
-        private set
+        protected set
         {
             amountInStock = value;
             UpdateLowStock();
@@ -40,13 +40,8 @@ public class Product
     public UnitType UnitType { get; set; }
     public string Id { get; private set; } = Guid.NewGuid().ToString("N");
 
-    public bool IsBelowStockTreshold { get;  private set; }
+    public bool IsBelowStockTreshold { get;  protected set; }
     
-    public static void ChangeStockTreshold(int newTreshold) {
-        if (newTreshold > 0) StockTreshold = newTreshold;
-    }
-
-
     public Product(
         string name,
         Price price,
@@ -63,8 +58,13 @@ public class Product
         AmountInStock = amountInStock;
         UpdateLowStock();
     }
+    
+    public static void ChangeStockTreshold(int newTreshold) {
+        if (newTreshold > 0) StockTreshold = newTreshold;
+    }
 
-    public void UseProduct(int items)
+
+    public virtual void UseProduct(int items)
     {
         if (items <= AmountInStock)
         {
@@ -79,9 +79,9 @@ public class Product
         Log($"Not enough items on stock for {CreateSimpleProductRepresentation()}. {AmountInStock} available but {items} requested.");
     }
 
-    public void IncreaseStock() => AmountInStock ++;
+    public virtual void IncreaseStock() => AmountInStock ++;
 
-    public void IncreaseStock(int amount)
+    public virtual void IncreaseStock(int amount)
     {
         int newStock = AmountInStock + amount;
 
@@ -99,11 +99,11 @@ public class Product
 
     }
 
-    public string DisplayDetailsShort() => $"{Id}. {Name} \n{AmountInStock} items in stock";
+    public virtual string DisplayDetailsShort() => $"{Id}. {Name} \n{AmountInStock} items in stock";
 
-    public string DisplayDetailsFull() => DisplayDetailsFull("");
+    public virtual string DisplayDetailsFull() => DisplayDetailsFull("");
     
-    public string DisplayDetailsFull(string extraDetails)
+    public virtual string DisplayDetailsFull(string extraDetails)
     {
         StringBuilder sb = new();
         //ToDo: add price here too
@@ -120,12 +120,12 @@ public class Product
 
     }
 
-    public void UpdateLowStock()
+    public virtual void UpdateLowStock()
     {
         if (AmountInStock < StockTreshold) IsBelowStockTreshold = true;
     }
     
-    private void DecreaseStock(int items, string reason)
+    protected virtual void DecreaseStock(int items, string reason)
     {
         AmountInStock = items <= AmountInStock ? AmountInStock - items : 0;
 
@@ -134,7 +134,7 @@ public class Product
         Log(reason);
     }
     
-    private void Log(string message) => Console.WriteLine(message);
+    protected virtual void Log(string message) => Console.WriteLine(message);
 
-    private string CreateSimpleProductRepresentation() => $"Product {Id} ({Name})";
+    protected virtual string CreateSimpleProductRepresentation() => $"Product {Id} ({Name})";
 }
